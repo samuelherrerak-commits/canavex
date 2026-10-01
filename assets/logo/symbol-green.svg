@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 358 160" role="img" aria-label="CANAVEX Auto Keys"><title>CANAVEX Auto Keys</title><rect width="358" height="160" fill="#0E6B45"/><g transform="translate(20,20) scale(1)">
+  <path fill="#F4F2EC" fill-rule="evenodd" d="M28 12h40a28 28 0 0 1 28 28v40a28 28 0 0 1-28 28H28A28 28 0 0 1 0 80V40a28 28 0 0 1 28-28Z
+    M48 38a13 13 0 0 0-7 24l-4 22h22l-4-22a13 13 0 0 0-7-24Z"/>
+  <rect fill="#F4F2EC" x="94" y="48" width="22" height="26"/>
+  <path fill="#141714" d="M112 46 L136 44 C152 42 166 22 198 21 C226 20 244 30 262 44 L298 50 C311 52 318 59 318 68 V80 a6 6 0 0 1-6 6 H294 a16 16 0 0 0-32 0 H174 a16 16 0 0 0-32 0 H112 Z"/>
+</g></svg>

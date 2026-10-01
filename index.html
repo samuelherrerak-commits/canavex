@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CANAVEX · Identidad visual</title>
+<meta name="description" content="Manual de identidad visual de CANAVEX Auto Keys, cerrajería automotriz. Logo, color, tipografía, pictogramas, movimiento y voz bilingüe.">
+<meta name="theme-color" content="#f4f2ec">
+<link rel="icon" href="assets/logo/avatar.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/frames.css">
+<link rel="stylesheet" href="assets/css/site.css">
+<style>
+  /* Portada */
+  .hero { padding: clamp(48px, 8vw, 112px) 0 clamp(64px, 9vw, 120px); }
+  .hero-mark { display: grid; gap: clamp(28px, 4vw, 48px); }
+  .hero-symbol { width: clamp(220px, 38vw, 520px); height: auto; overflow: visible; }
+  .hero-word { width: 100%; height: auto; display: block; }
+  .hero-row { display: grid; gap: 32px; margin-top: clamp(40px, 6vw, 72px); }
+  @media (min-width: 900px) { .hero-row { grid-template-columns: 1fr auto; align-items: end; } }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  /* Momento de autor: la hoja-auto entra en la cabeza de la llave y el ojo hace "clic" */
+  .hero-symbol [data-part="blade"] { animation: insert 900ms var(--ease-out) 200ms both; }
+  .hero-symbol [data-part="hole"] { transform-box: fill-box; transform-origin: 50% 50%; animation: click 320ms var(--ease-in-out) 1000ms both; }
+  @keyframes insert { from { transform: translateX(46%); opacity: 0; } 40% { opacity: 1; } to { transform: translateX(0); opacity: 1; } }
+  @keyframes click { 50% { transform: scale(0.55); } }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-symbol [data-part="blade"] { animation: fade 300ms ease both; }
+    .hero-symbol [data-part="hole"] { animation: none; }
+  }
+  @keyframes fade { from { opacity: 0; } }
+
+  /* Antes / después */
+  .ba { display: grid; gap: 20px; }
+  @media (min-width: 900px) { .ba { grid-template-columns: 1fr 1fr; } }
+  .ba figure { margin: 0; border-radius: 18px; overflow: hidden; background: #fff; display: grid; grid-template-rows: 1fr auto; }
+  .ba figure.new { background: var(--paper-2); }
+  .ba figure > div { display: grid; place-items: center; padding: clamp(20px, 4vw, 48px); min-height: 280px; }
+  .ba figcaption { padding: 16px 22px; font-weight: 800; font-stretch: 112%; font-size: 15px; letter-spacing: 0.04em; border-top: 1px solid color-mix(in oklab, var(--ink) 10%, transparent); display: flex; justify-content: space-between; }
+  .reasons { list-style: none; padding: 0; margin: 48px 0 0; display: grid; gap: 28px; }
+  @media (min-width: 900px) { .reasons { grid-template-columns: repeat(2, 1fr); gap: 36px 64px; } }
+  .reasons strong { display: block; font-weight: 850; font-stretch: 112%; font-size: 1.25rem; margin-bottom: 6px; letter-spacing: -0.01em; }
+  .reasons p { margin: 0; max-width: 52ch; }
+
+  /* Sistema de logo */
+  .logos { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); }
+  .logo-tile { position: relative; border-radius: 18px; overflow: hidden; display: grid; grid-template-rows: 1fr auto; min-height: 300px; }
+  .logo-tile .art { display: grid; place-items: center; padding: 36px; }
+  .logo-tile .art img { max-height: 200px; width: auto; }
+  .logo-tile .meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 18px; font-size: 14px; font-weight: 700; font-stretch: 112%; }
+  .logo-tile .meta a { font-weight: 800; }
+  .t-paper { background: var(--paper-2); }
+  .t-ink { background: var(--ink); color: var(--paper); }
+  .t-green { background: var(--green); color: var(--paper); }
+  .rules { display: grid; gap: 24px; margin-top: 56px; }
+  @media (min-width: 900px) { .rules { grid-template-columns: repeat(3, 1fr); } }
+  .rules h3 { margin-bottom: 6px; }
+  .rules p { margin: 0; }
+
+  /* Color */
+  .swatches { display: grid; gap: 0; border-radius: 18px; overflow: hidden; }
+  @media (min-width: 760px) { .swatches { grid-template-columns: 3fr 3fr 2.4fr 1.2fr; } }
+  .sw { min-height: 260px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; gap: 32px; }
+  .sw b { font-weight: 900; font-stretch: 125%; font-size: 1.6rem; text-transform: uppercase; line-height: 1; }
+  .sw dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 2px 14px; font-size: 14px; font-variant-numeric: tabular-nums; }
+  .sw dt { opacity: 0.75; }
+  .sw dd { margin: 0; font-weight: 700; }
+  .sw button { all: unset; cursor: pointer; font-weight: 800; border-bottom: 2px solid currentColor; justify-self: start; }
+  .pairs { display: grid; gap: 12px; margin-top: 40px; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .pair { border-radius: 14px; padding: 18px; font-weight: 800; font-stretch: 112%; display: flex; justify-content: space-between; align-items: end; min-height: 110px; }
+  .pair span { font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+  /* Tipografía */
+  .specimen { font-weight: 900; font-stretch: 125%; text-transform: uppercase; line-height: 0.85; font-size: clamp(4rem, 17vw, 6rem); letter-spacing: -0.02em; margin: 0 0 48px; overflow-wrap: anywhere; }
+  .scale { display: grid; gap: 0; }
+  .scale > div { display: grid; gap: 8px 32px; padding: 24px 0; border-top: 1px solid color-mix(in oklab, var(--paper) 16%, transparent); align-items: baseline; }
+  @media (min-width: 900px) { .scale > div { grid-template-columns: 220px 1fr; } }
+  .scale .spec { font-size: 14px; font-variant-numeric: tabular-nums; }
+  .glyphs { font-weight: 900; font-stretch: 125%; font-size: clamp(1.6rem, 4vw, 2.6rem); line-height: 1.2; letter-spacing: 0.02em; overflow-wrap: anywhere; margin: 40px 0 0; }
+
+  /* Pictogramas */
+  .icons { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 1px; background: color-mix(in oklab, var(--ink) 12%, transparent); border-radius: 18px; overflow: hidden; }
+  .icons figure { margin: 0; background: var(--paper); display: grid; place-items: center; gap: 10px; padding: 26px 8px 16px; color: var(--green); }
+  .icons figcaption { color: var(--ink-soft); font-size: 13px; font-weight: 700; }
+
+  /* Movimiento */
+  .motion-grid { display: grid; gap: 48px; }
+  @media (min-width: 960px) { .motion-grid { grid-template-columns: minmax(280px, 380px) 1fr; gap: 80px; align-items: start; } }
+  .player { display: grid; gap: 14px; }
+  .player-bar { display: flex; gap: 12px; align-items: center; }
+  .player-bar input[type=range] { flex: 1; accent-color: var(--signal); }
+  .player-bar .btn { padding: 10px 16px; }
+  .principles { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; }
+  .principles li { padding: 22px 0; border-top: 1px solid color-mix(in oklab, var(--paper) 16%, transparent); display: grid; gap: 4px; }
+  @media (min-width: 700px) { .principles li { grid-template-columns: 240px 1fr; gap: 24px; } }
+  .principles b { font-weight: 850; font-stretch: 112%; }
+  .principles code { font-size: 14px; color: var(--signal); }
+  .curve { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 28px; }
+  .dot-track { position: relative; height: 56px; border-radius: 999px; background: var(--ink-2); margin-top: 12px; overflow: hidden; }
+  .dot-track i { position: absolute; top: 8px; left: 8px; width: 40px; height: 40px; border-radius: 50%; background: var(--signal); }
+
+  /* Voz */
+  .voice { display: grid; gap: 16px; }
+  @media (min-width: 900px) { .voice { grid-template-columns: 1fr 1fr; } }
+  .voice-col { border-radius: 18px; padding: clamp(22px, 3vw, 36px); background: var(--paper-2); }
+  .voice-col.green { background: var(--green); color: var(--paper); }
+  .voice-col ul { margin: 16px 0 0; padding: 0; list-style: none; display: grid; gap: 14px; }
+  .voice-col li { display: grid; grid-template-columns: 28px 1fr; gap: 8px; font-size: 1.1rem; font-weight: 560; }
+  .voice-col li small { grid-column: 2; font-weight: 500; opacity: 0.8; font-size: 0.92rem; }
+  .pillars { display: grid; gap: 28px; margin-bottom: 56px; }
+  @media (min-width: 900px) { .pillars { grid-template-columns: repeat(3, 1fr); } }
+  .pillars p { margin: 0; }
+
+  .next { display: grid; gap: 28px; }
+  @media (min-width: 900px) { .next { grid-template-columns: 1fr auto; align-items: end; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="CANAVEX, inicio"><img src="assets/logo/wordmark-color.svg" alt="CANAVEX"></a>
+    <nav aria-label="Secciones">
+      <a href="index.html" aria-current="page">Marca</a>
+      <a href="octubre.html">Octubre</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-mark">
+        <svg class="hero-symbol" viewBox="0 0 318 120" role="img" aria-label="Símbolo CANAVEX: una llave cuya hoja es un auto">
+          <path style="fill:var(--ink)" d="M28 12h40a28 28 0 0 1 28 28v40a28 28 0 0 1-28 28H28A28 28 0 0 1 0 80V40a28 28 0 0 1 28-28Z"/>
+          <path style="fill:var(--paper)" data-part="hole" d="M48 38a13 13 0 0 0-7 24l-4 22h22l-4-22a13 13 0 0 0-7-24Z"/>
+          <rect style="fill:var(--ink)" x="94" y="48" width="22" height="26"/>
+          <path style="fill:var(--green)" data-part="blade" d="M112 46 L136 44 C152 42 166 22 198 21 C226 20 244 30 262 44 L298 50 C311 52 318 59 318 68 V80 a6 6 0 0 1-6 6 H294 a16 16 0 0 0-32 0 H174 a16 16 0 0 0-32 0 H112 Z"/>
+        </svg>
+        <h1 style="margin:0"><img class="hero-word" src="assets/logo/wordmark-color.svg" alt="CANAVEX" width="1500" height="250"></h1>
+      </div>
+      <div class="hero-row">
+        <p class="lede">Identidad visual de <strong>CANAVEX Auto Keys</strong>, cerrajería automotriz en Estados Unidos. Una idea, dos idiomas, tipografía grande y movimiento que explica el problema antes de resolverlo.</p>
+        <div class="hero-actions">
+          <a class="btn green" href="octubre.html">Contenido de octubre <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 60h84M74 34l26 26-26 26"/></svg></a>
+          <a class="btn ghost" href="#logo">Descargar logos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="antes">
+    <div class="wrap">
+      <h2 class="h2">De dos dibujos<br>a una idea.</h2>
+      <div class="ba">
+        <figure>
+          <div><img src="assets/logo/original.png" alt="Logo original de CANAVEX: silueta de auto con una llave superpuesta" loading="lazy"></div>
+          <figcaption><span>Original</span><span class="muted">Auto + llave superpuestos</span></figcaption>
+        </figure>
+        <figure class="new">
+          <div><img src="assets/logo/logo-vertical-color.svg" alt="Logo nuevo de CANAVEX" loading="lazy"></div>
+          <figcaption><span>Nuevo</span><span class="muted">La llave es el auto</span></figcaption>
+        </figure>
+      </div>
+      <ul class="reasons">
+        <li><strong>La hoja de la llave es el auto.</strong><p>El original apilaba una silueta de auto y una llave. Ahora es una sola forma: la cabeza con el ojo de cerradura y una hoja con perfil de auto. Los pasos de rueda son los cortes de la llave.</p></li>
+        <li><strong>La Λ se queda.</strong><p>La A sin travesaño del logo original era su mejor detalle. Se conserva en verde y ahora es la base del avatar: Λ más ojo de cerradura.</p></li>
+        <li><strong>Más ancha, más negra.</strong><p>Archivo Expanded Black convertida a trazos. Se lee en un avatar de 40 px, en un vinil de puerta y en un reel visto de reojo.</p></li>
+        <li><strong>Funciona en una tinta.</strong><p>Sin degradados ni sombras: sirve para bordado, sello, grabado láser en llaveros y vinil de un color.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="logo">
+    <div class="wrap">
+      <h2 class="h2">Sistema de logo</h2>
+      <div class="logos">
+        <div class="logo-tile t-paper"><div class="art"><img src="assets/logo/logo-vertical-color.svg" alt="Logo vertical a color"></div><div class="meta"><span>Vertical · color</span><a href="assets/logo/logo-vertical-color.svg" download>SVG</a></div></div>
+        <div class="logo-tile t-ink"><div class="art"><img src="assets/logo/logo-vertical-inverse.svg" alt="Logo vertical sobre tinta"></div><div class="meta"><span>Vertical · fondo tinta</span><a href="assets/logo/logo-vertical-inverse.svg" download>SVG</a></div></div>
+        <div class="logo-tile t-paper"><div class="art"><img src="assets/logo/logo-horizontal-color.svg" alt="Logo horizontal a color"></div><div class="meta"><span>Horizontal · color</span><a href="assets/logo/logo-horizontal-color.svg" download>SVG</a></div></div>
+        <div class="logo-tile t-green"><div class="art"><img src="assets/logo/logo-horizontal-green.svg" alt="Logo horizontal sobre verde"></div><div class="meta"><span>Horizontal · fondo verde</span><a href="assets/logo/logo-horizontal-green.svg" download>SVG</a></div></div>
+        <div class="logo-tile t-paper"><div class="art"><img src="assets/logo/symbol-color.svg" alt="Símbolo"></div><div class="meta"><span>Símbolo</span><a href="assets/logo/symbol-color.svg" download>SVG</a></div></div>
+        <div class="logo-tile t-green"><div class="art"><img src="assets/logo/avatar.svg" alt="Avatar para redes" style="max-height:220px;border-radius:50%"></div><div class="meta"><span>Avatar de perfil (recorte circular)</span><a href="assets/logo/avatar.svg" download>SVG</a></div></div>
+        <div class="logo-tile t-paper"><div class="art"><img src="assets/logo/logo-vertical-mono.svg" alt="Logo en una tinta"></div><div class="meta"><span>Una tinta</span><a href="assets/logo/logo-vertical-mono.svg" download>SVG</a></div></div>
+        <div class="logo-tile t-ink"><div class="art"><img src="assets/logo/wordmark-inverse.svg" alt="Solo la palabra CANAVEX"></div><div class="meta"><span>Solo palabra</span><a href="assets/logo/wordmark-inverse.svg" download>SVG</a></div></div>
+      </div>
+      <div class="rules">
+        <div><h3 class="h3">Zona de protección</h3><p class="muted">Alrededor del logo, deja libre como mínimo la altura de la Λ. Nada de texto ni bordes dentro de esa zona.</p></div>
+        <div><h3 class="h3">Tamaño mínimo</h3><p class="muted">Horizontal: 120 px de ancho en pantalla, 30 mm impreso. Por debajo, usa el símbolo o el avatar.</p></div>
+        <div><h3 class="h3">No hacer</h3><p class="muted">No estirar, no rotar, no cambiar la Λ por una A, no poner sombras ni degradados, no usarlo sobre fotos con mucho detalle.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="color">
+    <div class="wrap">
+      <h2 class="h2">Color</h2>
+      <p class="lede muted" style="margin-bottom:40px">Dos fondos fuertes y uno claro. El verde siempre significa “resuelto”: los problemas viven en tinta y papel, la solución llega en verde.</p>
+      <div class="swatches">
+        <div class="sw" style="background:var(--ink);color:var(--paper)"><b>Tinta</b><dl><dt>HEX</dt><dd>#141714</dd><dt>RGB</dt><dd>20 23 20</dd><dt>Uso</dt><dd>Problemas, cierres</dd></dl><button data-copy="#141714">Copiar HEX</button></div>
+        <div class="sw" style="background:var(--paper);color:var(--ink);box-shadow:inset 0 0 0 1px color-mix(in oklab,var(--ink) 12%,transparent)"><b>Papel</b><dl><dt>HEX</dt><dd>#F4F2EC</dd><dt>RGB</dt><dd>244 242 236</dd><dt>Uso</dt><dd>Fondos, información</dd></dl><button data-copy="#F4F2EC">Copiar HEX</button></div>
+        <div class="sw" style="background:var(--green);color:var(--paper)"><b>Verde<br>Canavex</b><dl><dt>HEX</dt><dd>#0E6B45</dd><dt>RGB</dt><dd>14 107 69</dd><dt>Uso</dt><dd>Soluciones, marca</dd></dl><button data-copy="#0E6B45">Copiar HEX</button></div>
+        <div class="sw" style="background:var(--signal);color:var(--ink)"><b>Señal</b><dl><dt>HEX</dt><dd>#3DDC84</dd><dt>Uso</dt><dd>Solo sobre tinta</dd></dl><button data-copy="#3DDC84">Copiar HEX</button></div>
+      </div>
+      <div class="pairs">
+        <div class="pair" style="background:var(--ink);color:var(--paper)">Aa <span>16.1 : 1</span></div>
+        <div class="pair" style="background:var(--green);color:var(--paper)">Aa <span>5.8 : 1</span></div>
+        <div class="pair" style="background:var(--ink);color:var(--signal)">Aa <span>10.1 : 1</span></div>
+        <div class="pair" style="background:var(--paper);color:var(--green)">Aa <span>5.8 : 1</span></div>
+        <div class="pair" style="background:var(--signal);color:var(--ink)">Aa <span>10.1 : 1</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block dark" id="tipografia">
+    <div class="wrap">
+      <h2 class="h2">Tipografía</h2>
+      <p class="specimen" aria-hidden="true">Auto<br>Keys.</p>
+      <div class="split">
+        <div class="prose">
+          <p class="lede">Una sola familia: <strong>Archivo</strong> (Google Fonts, licencia libre OFL). El eje de ancho hace el trabajo de dos familias: expandida y negra para gritar, normal para explicar.</p>
+          <p class="muted" style="margin-top:20px">Los titulares de redes se ajustan al ancho del cuadro línea por línea, como un póster. Siempre en mayúsculas y con punto final: es una afirmación, no una pregunta tímida.</p>
+        </div>
+        <div class="scale">
+          <div><span class="spec muted">Display · ancho 125 · peso 900 · MAYÚSCULAS</span><span style="font-weight:900;font-stretch:125%;font-size:clamp(2rem,5vw,3.6rem);line-height:.9;text-transform:uppercase">Te abrimos el carro.</span></div>
+          <div><span class="spec muted">Titular · ancho 112 · peso 880</span><span style="font-weight:880;font-stretch:112%;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1">Llaves nuevas en sitio</span></div>
+          <div><span class="spec muted">Texto · ancho 100 · peso 500</span><span style="font-size:1.25rem;max-width:44ch">Cortamos y programamos tu llave donde está el carro, aunque hayas perdido todas.</span></div>
+          <div><span class="spec muted">Etiqueta · ancho 125 · peso 800 · espaciado 0.22em</span><span style="font-weight:800;font-stretch:125%;font-size:.9rem;letter-spacing:.22em;text-transform:uppercase">Tip del lunes</span></div>
+        </div>
+      </div>
+      <p class="glyphs" aria-hidden="true">ABCDEFGHIJKLMNÑOPQRSTUVWXYZ ¿? ¡! ÁÉÍÓÚ 0123456789</p>
+    </div>
+  </section>
+
+  <section class="block" id="pictogramas">
+    <div class="wrap">
+      <h2 class="h2">Pictogramas</h2>
+      <p class="lede muted" style="margin-bottom:40px">Un trazo de 8 px en retícula de 120, puntas redondas. Cada uno nombra un problema o una acción; en los reels se mueven para explicarla: el candado se cierra, la llave se parte, el switch se traba.</p>
+      <div class="icons" id="icons"></div>
+    </div>
+  </section>
+
+  <section class="block dark" id="movimiento">
+    <div class="wrap">
+      <h2 class="h2">Movimiento</h2>
+      <div class="motion-grid">
+        <div class="player">
+          <div class="fscale r916" id="reelDemo" aria-label="Vista previa del reel 1"><div class="inner"></div></div>
+          <div class="player-bar">
+            <button class="btn green" id="reelPlay" type="button" aria-pressed="false">Reproducir</button>
+            <input type="range" id="reelScrub" min="0" max="1000" value="0" aria-label="Línea de tiempo del reel">
+          </div>
+          <p class="small muted" style="margin:0">Motor en vivo: el mismo código genera los MP4. Arrastra la línea de tiempo para ver cada transición.</p>
+        </div>
+        <div>
+          <p class="lede" style="margin-bottom:32px">Cada reel sigue el mismo guion: <strong>problema → transición ojo de cerradura → solución → marca</strong>. La transición de la cerradura es la firma: aparece una vez por video, justo cuando el problema se resuelve.</p>
+          <ul class="principles">
+            <li><b>Ojo de cerradura</b><span class="muted">La solución entra a través de la cerradura que se abre. 1 s, ease-in-out fuerte. Solo una vez por reel.</span></li>
+            <li><b>Barrido</b><span class="muted">Cambio de escena con un corte que sube desde abajo (clip-path), 620 ms.</span></li>
+            <li><b>Líneas que suben</b><span class="muted">Cada línea del titular sale de su propia máscara, 760 ms, escalonadas 90 ms.</span></li>
+            <li><b>El ícono explica</b><span class="muted">Los pictogramas solo se mueven para contar el problema, nunca por adorno.</span></li>
+            <li><b>Curvas</b><span><code>ease-out cubic-bezier(.23,1,.32,1)</code> para entrar · <code>ease-in-out cubic-bezier(.77,0,.175,1)</code> para mover. Nunca ease-in, nunca rebotes.</span></li>
+            <li><b>Nada sale de cero</b><span class="muted">Las escalas empiezan en 0.94–0.97 con opacidad, no en 0.</span></li>
+          </ul>
+          <div class="curve">
+            <button class="btn ghost" type="button" data-ease="out">Ver ease-out</button>
+            <button class="btn ghost" type="button" data-ease="in-out">Ver ease-in-out</button>
+          </div>
+          <div class="dot-track" aria-hidden="true"><i id="dot"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="voz">
+    <div class="wrap">
+      <h2 class="h2">Voz bilingüe</h2>
+      <div class="pillars">
+        <div><h3 class="h3">Directa</h3><p class="muted">Primero el problema, en las palabras del cliente. “¿Te quedaste afuera?”, no “Servicios de apertura vehicular”.</p></div>
+        <div><h3 class="h3">Tranquila</h3><p class="muted">Quien nos busca está estresado. Frases cortas, sin alarmas, sin signos de exclamación de más.</p></div>
+        <div><h3 class="h3">Honesta</h3><p class="muted">No prometemos minutos ni precios que no podemos sostener. Decimos qué hacemos y cómo contactarnos.</p></div>
+      </div>
+      <div class="voice">
+        <div class="voice-col green">
+          <h3 class="h3">Así sí</h3>
+          <ul>
+            <li><span data-i="check"></span><span>Te abrimos el carro.<small>We get you in.</small></span></li>
+            <li><span data-i="check"></span><span>Llave nueva en sitio.<small>New key on the spot.</small></span></li>
+            <li><span data-i="check"></span><span>Guarda este número.<small>Save this number.</small></span></li>
+          </ul>
+        </div>
+        <div class="voice-col">
+          <h3 class="h3">Así no</h3>
+          <ul>
+            <li><span data-i="cross"></span><span>¡¡¡Los mejores precios del mercado!!!<small>Superlativos y gritos vacíos.</small></span></li>
+            <li><span data-i="cross"></span><span>Soluciones integrales de cerrajería vehicular.<small>Lenguaje de folleto.</small></span></li>
+            <li><span data-i="cross"></span><span>Llegamos en 10 minutos garantizado.<small>Promesas que no dependen de nosotros.</small></span></li>
+          </ul>
+        </div>
+      </div>
+      <p class="muted" style="margin:32px 0 0;max-width:70ch">Cada pieza se publica en dos versiones, español e inglés, con el mismo diseño. El inglés no es una traducción literal: “¿Te quedaste afuera?” se vuelve “Locked out?”.</p>
+    </div>
+  </section>
+
+  <section class="block green">
+    <div class="wrap next">
+      <div>
+        <h2 class="h2" style="margin-bottom:16px">Octubre,<br>listo para subir.</h2>
+        <p class="lede">7 reels, 7 carruseles e historias de lunes a viernes, en español e inglés, con textos para copiar y archivos para descargar.</p>
+      </div>
+      <a class="btn" href="octubre.html">Abrir calendario</a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <img src="assets/logo/wordmark-inverse.svg" alt="CANAVEX">
+    <span>Manual de identidad · Octubre 2026</span>
+  </div>
+</footer>
+
+<script src="assets/js/brand.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/content.js"></script>
+<script src="assets/js/frames.js"></script>
+<script src="assets/js/site.js"></script>
+<script>
+  // Pictogramas
+  document.getElementById("icons").innerHTML = CX.iconNames
+    .map((n) => `<figure>${CX.icon(n, { size: 64 })}<figcaption>${n}</figcaption></figure>`)
+    .join("");
+
+  // Copiar color
+  document.querySelectorAll("[data-copy]").forEach((b) => b.addEventListener("click", () => CX.copy(b.dataset.copy, b, "Copiado")));
+
+  // Demo de curvas: transición (interrumpible) sobre transform
+  const dot = document.getElementById("dot");
+  let atEnd = false;
+  document.querySelectorAll("[data-ease]").forEach((b) =>
+    b.addEventListener("click", () => {
+      const track = dot.parentElement.clientWidth - 56;
+      dot.style.transition = `transform 700ms var(--ease-${b.dataset.ease})`;
+      atEnd = !atEnd;
+      dot.style.transform = atEnd ? `translateX(${track}px)` : "translateX(0)";
+    })
+  );
+
+  // Reel en vivo
+  CX.mountReel(document.getElementById("reelDemo"), CX.reels[0], "es", {
+    play: document.getElementById("reelPlay"),
+    scrub: document.getElementById("reelScrub"),
+  });
+</script>
+</body>
+</html>

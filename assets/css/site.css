@@ -1,0 +1,78 @@
+/* Sitio: manual de marca + calendario de octubre */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scrollbar-color: var(--green) var(--paper-2); }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 18px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+::selection { background: var(--green); color: var(--paper); }
+:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; border-radius: 4px; }
+input, textarea { caret-color: var(--green); }
+a { color: inherit; text-decoration-thickness: 2px; text-underline-offset: 0.2em; text-decoration-color: var(--green); }
+img, svg, video { max-width: 100%; }
+.wrap { width: min(1360px, 100% - 32px); margin-inline: auto; }
+@media (min-width: 760px) { .wrap { width: min(1360px, 100% - 96px); } }
+
+/* Barra superior */
+.top { position: sticky; top: 0; z-index: 20; background: color-mix(in oklab, var(--paper) 92%, transparent); backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid color-mix(in oklab, var(--ink) 10%, transparent); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; }
+.top .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.top .brand img { height: 22px; width: auto; display: block; }
+.top nav { display: flex; gap: 4px; }
+.top nav a { text-decoration: none; font-weight: 700; font-stretch: 112%; font-size: 15px; padding: 8px 14px; border-radius: 999px; transition: background-color 160ms ease, color 160ms ease; }
+.top nav a[aria-current="page"] { background: var(--ink); color: var(--paper); }
+@media (hover: hover) and (pointer: fine) { .top nav a:not([aria-current]):hover { background: var(--paper-2); } }
+
+/* Tipografía de sitio */
+.mega { font-weight: 900; font-stretch: 125%; text-transform: uppercase; line-height: 0.88; letter-spacing: -0.015em; margin: 0; font-size: clamp(3.2rem, 11vw, 6rem); text-wrap: balance; }
+.h2 { font-weight: 900; font-stretch: 125%; text-transform: uppercase; line-height: 0.92; letter-spacing: -0.01em; margin: 0 0 28px; font-size: clamp(2.2rem, 6vw, 4.5rem); text-wrap: balance; }
+.h3 { font-weight: 850; font-stretch: 112%; font-size: 1.5rem; line-height: 1.1; margin: 0 0 8px; letter-spacing: -0.01em; }
+.lede { font-size: clamp(1.15rem, 1.6vw, 1.4rem); line-height: 1.45; max-width: 46ch; font-weight: 500; margin: 0; text-wrap: pretty; }
+.muted { color: var(--ink-soft); }
+.small { font-size: 15px; }
+.mono-num { font-variant-numeric: tabular-nums; }
+
+section.block { padding: clamp(72px, 10vw, 140px) 0; border-top: 1px solid color-mix(in oklab, var(--ink) 12%, transparent); }
+section.block.dark { background: var(--ink); color: var(--paper); border-top: 0; }
+section.block.dark .muted { color: var(--paper-soft); }
+section.block.green { background: var(--green); color: var(--paper); border-top: 0; }
+section.block.green .muted { color: var(--green-soft); }
+.split { display: grid; gap: 40px; }
+@media (min-width: 960px) { .split { grid-template-columns: 5fr 7fr; gap: 72px; align-items: start; } }
+.prose p { max-width: 62ch; margin: 0 0 14px; }
+
+/* Botones */
+.btn { display: inline-flex; align-items: center; gap: 10px; border: 0; cursor: pointer; font: inherit; font-weight: 800; font-stretch: 112%; font-size: 16px; padding: 14px 22px; border-radius: 999px; background: var(--ink); color: var(--paper); text-decoration: none; transition: transform 140ms var(--ease-out), background-color 160ms ease; }
+.btn:active { transform: scale(0.97); }
+.btn.ghost { background: transparent; color: inherit; box-shadow: inset 0 0 0 2px currentColor; }
+.btn.green { background: var(--green); }
+@media (hover: hover) and (pointer: fine) { .btn:hover { background: var(--ink-2); } .btn.green:hover { background: var(--green-deep); } .btn.ghost:hover { background: color-mix(in oklab, currentColor 8%, transparent); } }
+.btn svg { width: 18px; height: 18px; }
+
+/* Control segmentado ES/EN */
+.seg { max-width: 100%; display: inline-flex; padding: 4px; border-radius: 999px; background: var(--paper-2); position: relative; }
+.seg button { position: relative; z-index: 1; border: 0; background: none; font: inherit; font-weight: 800; font-stretch: 112%; font-size: 14px; letter-spacing: 0.08em; padding: 8px 16px; border-radius: 999px; cursor: pointer; color: var(--ink-soft); transition: color 180ms ease; }
+.seg button[aria-pressed="true"] { color: var(--paper); }
+@media (max-width: 520px) { .seg button { padding: 8px 11px; font-size: 13px; letter-spacing: 0.02em; } }
+.seg .thumb { position: absolute; top: 4px; bottom: 4px; left: 0; border-radius: 999px; background: var(--ink); transition: transform 220ms var(--ease-in-out); }
+
+/* Frames escalados dentro del sitio */
+.fscale { position: relative; width: 100%; overflow: hidden; border-radius: 14px; background: var(--ink); box-shadow: 0 0 0 1px color-mix(in oklab, var(--paper) 16%, transparent); }
+.fscale > .inner { position: absolute; top: 0; left: 0; transform-origin: 0 0; }
+.fscale.r916 { aspect-ratio: 9 / 16; }
+.fscale.r45 { aspect-ratio: 4 / 5; }
+
+/* Pie */
+.foot { padding: 48px 0 64px; background: var(--ink); color: var(--paper-soft); font-size: 15px; }
+.foot .wrap { display: flex; flex-wrap: wrap; gap: 16px 32px; justify-content: space-between; align-items: center; }
+.foot img { height: 24px; width: auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn, .seg .thumb, .top nav a { transition: none; }
+}

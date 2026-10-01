@@ -1,0 +1,16 @@
+{
+  "name": "canavex-identidad",
+  "private": true,
+  "description": "Identidad visual y contenido de redes de CANAVEX Auto Keys (sitio estático).",
+  "scripts": {
+    "serve": "npx --yes serve -l 4321 .",
+    "export": "node scripts/export.mjs",
+    "export:reels": "node scripts/export.mjs reels",
+    "export:carruseles": "node scripts/export.mjs carruseles",
+    "export:historias": "node scripts/export.mjs historias",
+    "logo": "python3 scripts/build-logo.py"
+  },
+  "devDependencies": {
+    "playwright": "1.56.1"
+  }
+}

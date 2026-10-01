@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1080">
+<title>CANAVEX · Render</title>
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/frames.css">
+<style>html,body{margin:0;background:#000}#host{width:1080px}</style>
+</head>
+<body>
+<div id="host"></div>
+<script src="assets/js/brand.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/content.js"></script>
+<script src="assets/js/frames.js"></script>
+<script>
+/* Página de render a tamaño nativo. La usa scripts/export.mjs:
+   ?type=reel&id=1&lang=es[&t=ms] · ?type=carousel&id=1&slide=0&lang=en · ?type=story&id=2026-10-01&frame=0&lang=es[&guides=1] */
+(async () => {
+  const q = new URLSearchParams(location.search);
+  const type = q.get("type") || "reel";
+  const lang = q.get("lang") || "es";
+  const host = document.getElementById("host");
+  document.documentElement.lang = lang;
+  if (type === "reel") {
+    const reel = CX.reels.find((r) => r.id === +q.get("id")) || CX.reels[0];
+    window.__reel = await new CX.Reel(host, reel, lang).build();
+    if (q.has("t")) window.__reel.seek(+q.get("t"));
+    else if (q.has("play")) window.__reel.play();
+  } else if (type === "carousel") {
+    const car = CX.carousels.find((c) => c.id === +q.get("id")) || CX.carousels[0];
+    await CX.renderSlide(host, car, +(q.get("slide") || 0), lang);
+  } else {
+    const st = CX.stories.find((s) => s.id === q.get("id")) || CX.stories[0];
+    await CX.renderStory(host, st, +(q.get("frame") || 0), lang, { guides: q.has("guides") });
+  }
+  window.__ready = true;
+})();
+</script>
+</body>
+</html>

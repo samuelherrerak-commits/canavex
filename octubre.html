@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CANAVEX · Octubre 2026</title>
+<meta name="description" content="Calendario de contenido de octubre 2026 para CANAVEX Auto Keys: 7 reels, 7 carruseles e historias de lunes a viernes, en español e inglés.">
+<meta name="theme-color" content="#f4f2ec">
+<link rel="icon" href="assets/logo/avatar.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/site.css">
+<style>
+  .hero { padding: clamp(40px, 7vw, 96px) 0 clamp(32px, 5vw, 56px); }
+  .hero .mega { font-size: clamp(3.4rem, 15vw, 6rem); }
+  .hero-row { display: grid; gap: 24px; margin-top: 28px; }
+  @media (min-width: 900px) { .hero-row { grid-template-columns: 1fr auto; align-items: end; } }
+  .controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+  /* Leyenda de tipos */
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0 0 20px; padding: 0; list-style: none; font-size: 14px; font-weight: 700; font-stretch: 112%; }
+  .legend li { display: inline-flex; align-items: center; gap: 8px; }
+  .k { display: inline-block; width: 12px; height: 12px; border-radius: 3px; }
+  .k-reel { background: var(--green); }
+  .k-car { background: var(--ink); }
+  .k-story { background: transparent; box-shadow: inset 0 0 0 2px var(--ink-soft); border-radius: 50%; }
+
+  /* Calendario */
+  .cal { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+  .cal .dow { font-size: 13px; font-weight: 800; font-stretch: 112%; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); padding: 0 4px 6px; }
+  .day { position: relative; min-height: 132px; border-radius: 12px; background: var(--paper-2); padding: 10px; display: flex; flex-direction: column; gap: 6px; border: 0; text-align: left; font: inherit; color: inherit; cursor: pointer; transition: background-color 160ms ease, transform 140ms var(--ease-out); }
+  .day:active { transform: scale(0.98); }
+  @media (hover: hover) and (pointer: fine) { .day:hover { background: color-mix(in oklab, var(--paper-2) 70%, var(--green) 12%); } }
+  .day.empty { background: transparent; cursor: default; }
+  .day.weekend { background: color-mix(in oklab, var(--paper-2) 50%, var(--paper)); cursor: default; }
+  .day .n { font-weight: 900; font-stretch: 125%; font-size: 1.5rem; line-height: 1; font-variant-numeric: tabular-nums; }
+  .tag { display: block; font-size: 12.5px; font-weight: 700; line-height: 1.2; padding: 5px 7px; border-radius: 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tag.reel { background: var(--green); color: var(--paper); }
+  .tag.car { background: var(--ink); color: var(--paper); }
+  .tag.story { box-shadow: inset 0 0 0 1.5px color-mix(in oklab, var(--ink) 35%, transparent); color: var(--ink-soft); }
+  [data-filter="reel"] .tag:not(.reel), [data-filter="car"] .tag:not(.car), [data-filter="story"] .tag:not(.story) { opacity: 0.15; }
+  @media (max-width: 760px) {
+    .cal { grid-template-columns: 1fr; }
+    .cal .dow, .day.empty, .day.weekend { display: none; }
+    .day { min-height: 0; flex-direction: row; flex-wrap: wrap; align-items: center; }
+    .day .n { width: 100%; font-size: 1.1rem; }
+    .day .n::after { content: attr(data-dow); margin-left: 8px; font-size: 0.8rem; font-weight: 700; font-stretch: 100%; color: var(--ink-soft); }
+  }
+
+  /* Filas por tipo */
+  .row-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; }
+  .row-head .h2 { margin: 0; }
+  .rail { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(220px, 1fr); gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; overscroll-behavior-x: contain; }
+  .rail.cars { grid-auto-columns: minmax(260px, 1fr); }
+  .rail > * { scroll-snap-align: start; }
+  .post { border: 0; background: none; padding: 0; text-align: left; font: inherit; color: inherit; cursor: pointer; display: grid; gap: 10px; }
+  .post .media { border-radius: 14px; overflow: hidden; background: var(--ink); aspect-ratio: 9 / 16; }
+  .post .media.r45 { aspect-ratio: 4 / 5; }
+  .post .media img, .post .media video { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 300ms var(--ease-out); }
+  @media (hover: hover) and (pointer: fine) { .post:hover .media img { transform: scale(1.03); } }
+  .post .when { font-size: 13px; font-weight: 800; font-stretch: 112%; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); }
+  section.block.dark .post .when { color: var(--paper-soft); }
+  .post .ttl { font-weight: 850; font-stretch: 112%; font-size: 1.15rem; line-height: 1.15; }
+  .themes { display: grid; gap: 1px; background: color-mix(in oklab, var(--paper) 16%, transparent); border-radius: 14px; overflow: hidden; margin-bottom: 40px; }
+  @media (min-width: 900px) { .themes { grid-template-columns: repeat(5, 1fr); } }
+  .themes div { background: var(--ink); padding: 18px; }
+  .themes b { display: block; font-weight: 900; font-stretch: 125%; text-transform: uppercase; font-size: 1.05rem; }
+  .themes span { font-size: 15px; color: var(--paper-soft); }
+
+  /* Panel de detalle (dialog) */
+  dialog.sheet { border: 0; padding: 0; margin: 0 0 0 auto; height: 100dvh; max-height: 100dvh; width: min(760px, 100vw); background: var(--paper); color: var(--ink); box-shadow: -24px 0 60px -20px rgb(0 0 0 / 0.35); }
+  dialog.sheet[open] { transform: translateX(0); transition: transform 380ms var(--ease-drawer), overlay 380ms allow-discrete, display 380ms allow-discrete; }
+  @starting-style { dialog.sheet[open] { transform: translateX(100%); } }
+  dialog.sheet:not([open]) { transform: translateX(100%); transition: transform 240ms var(--ease-out), overlay 240ms allow-discrete, display 240ms allow-discrete; }
+  dialog.sheet::backdrop { background: rgb(20 23 20 / 0.5); transition: opacity 300ms ease, overlay 300ms allow-discrete, display 300ms allow-discrete; opacity: 1; }
+  @starting-style { dialog.sheet[open]::backdrop { opacity: 0; } }
+  dialog.sheet:not([open])::backdrop { opacity: 0; }
+  @media (prefers-reduced-motion: reduce) {
+    dialog.sheet[open], dialog.sheet:not([open]) { transition: opacity 200ms ease, overlay 200ms allow-discrete, display 200ms allow-discrete; transform: none; }
+    @starting-style { dialog.sheet[open] { opacity: 0; transform: none; } }
+    dialog.sheet:not([open]) { opacity: 0; }
+  }
+  .sheet-in { height: 100%; overflow-y: auto; overscroll-behavior: contain; }
+  .sheet-top { position: sticky; top: 0; z-index: 2; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 20px; background: var(--paper); border-bottom: 1px solid color-mix(in oklab, var(--ink) 10%, transparent); }
+  .sheet-top .date { font-weight: 900; font-stretch: 125%; text-transform: uppercase; font-size: 1.1rem; }
+  .icon-btn { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--paper-2); display: grid; place-items: center; cursor: pointer; color: var(--ink); transition: transform 140ms var(--ease-out); }
+  .icon-btn:active { transform: scale(0.94); }
+  .sheet-body { padding: 24px 20px 64px; display: grid; gap: 56px; }
+  @media (min-width: 700px) { .sheet-body { padding: 32px 36px 72px; } }
+  .entry h3 { font-weight: 900; font-stretch: 125%; text-transform: uppercase; font-size: clamp(1.6rem, 4vw, 2.2rem); line-height: 0.95; margin: 6px 0 20px; }
+  .entry .kind { font-size: 13px; font-weight: 800; font-stretch: 112%; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green); }
+  .entry video { width: min(100%, 360px); aspect-ratio: 9 / 16; border-radius: 14px; background: var(--ink); display: block; }
+  .slides { display: grid; grid-auto-flow: column; grid-auto-columns: min(78%, 340px); gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; }
+  .slides img { width: 100%; border-radius: 10px; scroll-snap-align: start; display: block; }
+  .slides.stories { grid-auto-columns: min(46%, 230px); }
+  .caption { margin-top: 20px; background: var(--paper-2); border-radius: 14px; padding: 18px; }
+  .caption p { margin: 0 0 12px; white-space: pre-line; max-width: 62ch; }
+  .caption .tags { color: var(--green); font-weight: 600; font-size: 15px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .actions .btn { font-size: 14px; padding: 11px 16px; }
+  .meta-list { margin: 16px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; font-size: 15px; }
+  .meta-list dt { font-weight: 800; font-stretch: 112%; }
+  .meta-list dd { margin: 0; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="CANAVEX, inicio"><img src="assets/logo/wordmark-color.svg" alt="CANAVEX"></a>
+    <nav aria-label="Secciones">
+      <a href="index.html">Marca</a>
+      <a href="octubre.html" aria-current="page">Octubre</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <h1 class="mega">Octubre<br>2026.</h1>
+      <div class="hero-row">
+        <p class="lede">7 reels, 7 carruseles e historias de lunes a viernes. Toca un día para ver las piezas, copiar el texto y descargar los archivos.</p>
+        <div class="controls">
+          <div class="seg" id="lang" role="group" aria-label="Idioma del contenido">
+            <button type="button" data-value="es">ES</button>
+            <button type="button" data-value="en">EN</button>
+          </div>
+          <div class="seg" id="filter" role="group" aria-label="Filtrar calendario">
+            <button type="button" data-value="all">Todo</button>
+            <button type="button" data-value="reel">Reels</button>
+            <button type="button" data-value="car">Carruseles</button>
+            <button type="button" data-value="story">Historias</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-bottom:clamp(64px,8vw,112px)">
+    <ul class="legend">
+      <li><span class="k k-reel"></span>Reel</li>
+      <li><span class="k k-car"></span>Carrusel</li>
+      <li><span class="k k-story"></span>Historia (2 pantallas)</li>
+    </ul>
+    <div class="cal" id="cal" data-filter="all"></div>
+  </section>
+
+  <section class="block green">
+    <div class="wrap">
+      <div class="row-head"><h2 class="h2">7 reels</h2><p class="muted" style="margin:0;max-width:40ch">MP4 de 1080×1920 sin audio: súbelos y elige un audio en tendencia dentro de Instagram o TikTok.</p></div>
+      <div class="rail" id="reels"></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="row-head"><h2 class="h2">7 carruseles</h2><p class="muted" style="margin:0;max-width:40ch">PNG de 1080×1350 (4:5), el formato que más ocupa en el feed.</p></div>
+      <div class="rail cars" id="cars"></div>
+    </div>
+  </section>
+
+  <section class="block dark">
+    <div class="wrap">
+      <div class="row-head"><h2 class="h2">Historias</h2><p class="muted" style="margin:0;max-width:44ch">Un tema fijo por día. La primera pantalla deja espacio para el sticker interactivo de Instagram.</p></div>
+      <div class="themes" id="themes"></div>
+      <div class="rail" id="stories"></div>
+    </div>
+  </section>
+</main>
+
+<dialog class="sheet" id="sheet" aria-labelledby="sheetDate">
+  <div class="sheet-in">
+    <div class="sheet-top">
+      <span class="date" id="sheetDate"></span>
+      <button class="icon-btn" type="button" id="sheetClose" aria-label="Cerrar"><span data-i="cross" data-size="20"></span></button>
+    </div>
+    <div class="sheet-body" id="sheetBody"></div>
+  </div>
+</dialog>
+
+<footer class="foot">
+  <div class="wrap">
+    <img src="assets/logo/wordmark-inverse.svg" alt="CANAVEX">
+    <span>Contenido de octubre 2026 · Español e inglés</span>
+  </div>
+</footer>
+
+<script src="assets/js/brand.js"></script>
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/content.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/calendar.js"></script>
+</body>
+</html>
