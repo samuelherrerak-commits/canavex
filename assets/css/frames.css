@@ -45,9 +45,6 @@
 .bullets { list-style: none; margin: 72px 0 0; padding: 0; display: grid; gap: 34px; }
 .bullets li { display: flex; align-items: center; gap: 28px; font-size: 50px; font-weight: 680; font-stretch: 100%; line-height: 1.1; }
 .bullets .cx-icon { flex: none; color: var(--ink); }
-.progress { position: absolute; top: 120px; left: 96px; right: 96px; height: 6px; border-radius: 3px; background: color-mix(in oklab, currentColor 24%, transparent); z-index: 5; overflow: hidden; color: var(--paper); }
-.reel-frame[data-bg="paper"] .progress { color: var(--ink); }
-.progress i { position: absolute; inset: 0; background: currentColor; transform-origin: left; transform: scaleX(0); }
 .cta-scene { align-items: center; text-align: center; }
 .cta-scene .cx-symbol { overflow: visible; margin-bottom: 64px; }
 .cta-scene .wordmark { width: 820px; height: auto; display: block; }

@@ -133,7 +133,6 @@
               </div>
             </section>
           </div>
-          <div class="progress"><i></i></div>
         </div>`;
       this.frame = this.host.firstElementChild;
       await CX.fontsReady();
@@ -168,9 +167,6 @@
     compose() {
       const [hook, problem, solution, cta] = this.scenes;
       const H = this.q("hook"), P = this.q("problem"), S = this.q("solution"), C = this.q("cta");
-
-      // Barra de progreso: lineal, toda la duración
-      this.add(this.frame.querySelector(".progress i"), [{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }], 0, this.duration, "linear");
 
       // 1 · Gancho: las líneas suben desde su máscara; antes del corte se comprimen hacia arriba
       this.riseLines(H, 120, 110);
@@ -296,16 +292,11 @@
     seek(ms) {
       this.t = Math.max(0, Math.min(ms, this.duration));
       for (const a of this.anims) a.currentTime = this.t;
-      let top = null;
       this.scenes.forEach((s, i) => {
         const next = this.scenes[i + 1];
         const until = next ? next.start + REVEAL_MS[next.reveal] : Infinity;
-        const el = this.q(s.key);
-        el.hidden = !(this.t >= s.start && this.t < until);
-        if (!el.hidden && this.t >= s.start + REVEAL_MS[s.reveal] / 2) top = el;
+        this.q(s.key).hidden = !(this.t >= s.start && this.t < until);
       });
-      // La barra de progreso toma el color de la escena que domina el cuadro
-      if (top) this.frame.dataset.bg = top.className.match(/bg-(\w+)/)[1];
     }
 
     play() {
